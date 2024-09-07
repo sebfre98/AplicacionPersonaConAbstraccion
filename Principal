@@ -1,0 +1,80 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+
+class Persona {
+protected:
+   string nombre;
+   int edad;
+
+public:
+   Persona(string nombre, int edad) : nombre(nombre), edad(edad) {}
+
+   
+   virtual void mostrarInformacion() const = 0;
+
+  
+   string obtenerNombre() const {
+       return nombre;
+   }
+
+ 
+   int obtenerEdad() const {
+       return edad;
+   }
+
+
+   virtual ~Persona() {}
+};
+
+// Clase Estudiante (hereda de Persona)
+class Estudiante : public Persona {
+private:
+   string carrera;
+   int matricula;
+
+public:
+   Estudiante(string nombre, int edad, string carrera, int matricula)
+       : Persona(nombre, edad), carrera(carrera), matricula(matricula) {}
+
+   
+   void mostrarInformacion() const override {
+       cout << "Estudiante: " << nombre << endl;
+       cout << "Edad: " << edad << endl;
+       cout << "Carrera: " << carrera << endl;
+       cout << "Matrícula: " << matricula << endl;
+   }
+};
+
+
+class Profesor : public Persona {
+private:
+   string departamento;
+   double salario;
+
+public:
+   Profesor(string nombre, int edad, string departamento, double salario)
+       : Persona(nombre, edad), departamento(departamento), salario(salario) {}
+
+   
+   void mostrarInformacion() const override {
+       cout << "Profesor: " << nombre << endl;
+       cout << "Edad: " << edad << endl;
+       cout << "Departamento: " << departamento << endl;
+       cout << "Salario: $" << salario << endl;
+   }
+};
+
+int main() {
+  
+   Estudiante estudiante1("Ana Figueredo", 20, "Ingeniería en Sistemas", 12345);
+   Profesor profesor1("Carlos Ramirez", 45, "Ciencias de la Computación", 55000);
+
+  
+   estudiante1.mostrarInformacion();
+   cout << endl;
+   profesor1.mostrarInformacion();
+
+   return 0;
+}
